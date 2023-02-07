@@ -3,7 +3,6 @@ import React from "react";
 export const getSubredditArticles = async (subreddit) => {
     try{
         let url = `https://www.reddit.com/r/${subreddit}.json`;
-        console.log(url);
         let response = await fetch(url);
         if (response.ok) {
           let json = await response.json();        
@@ -16,5 +15,3 @@ export const getSubredditArticles = async (subreddit) => {
         )
     }
 };
-
-//export const fetchArticles = async (subreddit)
