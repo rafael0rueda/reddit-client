@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-       <h2>Title</h2>
+       <h2>Reddit-viewer</h2>
        <nav>
         <Subreddit />
        </nav>

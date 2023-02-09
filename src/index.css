@@ -17,3 +17,8 @@ nav{
 article{
   border: 2px solid orangered;
 }
+
+
+.comment {
+  border: 1px solid  blue;
+}

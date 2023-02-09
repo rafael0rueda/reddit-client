@@ -1,36 +1,68 @@
-import React from "react";
+import React,  {useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Comments from "../comments/comments";
+import { toggleShowComments, setPreId } from "./subredditSlice";
 
 function Article(props) {
     const article = props.article;
+    const dispatch = useDispatch();
+    let prevComments = useSelector(state => state.subreddit.prevId);
+    //let showComments = article.showComments;
+
+    //Find the type of media to be display
+    function mediaDisplay(article) {
+        if (article.is_video == true) {
+            return (<video src={article.media.reddit_video.fallback_url} type="video/mp4" width="300px" controls>Video not support</video>);
+        }
+        if (!isValidUrl(article.thumbnail)) {
+            return;
+        }
+        if (!article.is_reddit_media_domain) {
+            return (<img src={article.thumbnail} />);
+        }
+        //console.log(article.thumbnail);
+        return (<img src={article.url_overridden_by_dest} width="300px" />);
+
+    }
+
+    const OnClickLoadComments = (bool) =>{
+        const payload = {
+            show: bool,
+            id: article.id
+        }
+        dispatch(toggleShowComments(payload));
+        
+        if(bool == true && prevComments !== article.id){
+            const payload1 = {
+                show: false,
+                id: prevComments
+            }
+            console.log(payload1);
+            dispatch(toggleShowComments(payload1));   
+        }
+        dispatch(setPreId(article.id));
+  
+    }
+
+  
 
     return (
         <article>
-                <h3>{props.article.title}</h3>
+                <h3>{article.title}</h3>
                 <h3>{article.author}</h3>
                 {
                     mediaDisplay(article)
-                }      
+                }
+                <button type="button" className="load-comments" aria-label="Show Comments" onClick={() => OnClickLoadComments(true)} >Load Comments</button>
+                <button type="button" className="load-comments" aria-label="Show Comments" onClick={() => OnClickLoadComments(false)} >Hide Comments</button>
+                {article.showComments && (<Comments article={article} />)}
         </article>
     )
+    
 }
 
 export default Article;
 
-//Find the type of media to be display
-const mediaDisplay = (article) =>{
-    if(article.is_video == true){
-        return (<video src={article.media.reddit_video.fallback_url} type="video/mp4" width="300px" controls >Video not support</video>);
-    }
-    if(!isValidUrl(article.thumbnail)){
-        return;
-    }
-    if(!article.is_reddit_media_domain){
-        return (<img src={article.thumbnail}  />);
-    }
-    console.log(article.thumbnail);
-    return (<img src={article.url_overridden_by_dest} width="300px" />);
-    
-};
 
 const isValidUrl = urlString=> {
     var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
@@ -40,4 +72,4 @@ const isValidUrl = urlString=> {
   '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
   '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
 return !!urlPattern.test(urlString);
-}
+};
