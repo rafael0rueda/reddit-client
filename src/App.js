@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Subreddit from './features/subreddit/subreddit';
 import Articles from './features/subreddit/articles';
 
@@ -12,7 +12,7 @@ function App() {
         <Subreddit />
        </nav>
       </header>
-      <Articles />
+        <Articles />
     </div>
   );
 }

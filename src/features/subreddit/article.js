@@ -7,7 +7,6 @@ function Article(props) {
     const article = props.article;
     const dispatch = useDispatch();
     let prevComments = useSelector(state => state.subreddit.prevId);
-    //let showComments = article.showComments;
 
     //Find the type of media to be display
     function mediaDisplay(article) {
@@ -20,10 +19,8 @@ function Article(props) {
         if (!article.is_reddit_media_domain) {
             return (<img src={article.thumbnail} />);
         }
-        //console.log(article.thumbnail);
-        return (<img src={article.url_overridden_by_dest} width="300px" />);
-
-    }
+        return (<img src={article.url_overridden_by_dest} />);
+    };
 
     const OnClickLoadComments = (bool) =>{
         const payload = {
@@ -31,7 +28,7 @@ function Article(props) {
             id: article.id
         }
         dispatch(toggleShowComments(payload));
-        
+        //Change the show state of the previous articles comments 
         if(bool == true && prevComments !== article.id){
             const payload1 = {
                 show: false,
@@ -41,25 +38,25 @@ function Article(props) {
             dispatch(toggleShowComments(payload1));   
         }
         dispatch(setPreId(article.id));
-  
-    }
-
-  
+    };
 
     return (
         <article>
                 <h3>{article.title}</h3>
-                <h3>{article.author}</h3>
+                <h4>Author: {article.author}</h4>
                 {
                     mediaDisplay(article)
                 }
-                <button type="button" className="load-comments" aria-label="Show Comments" onClick={() => OnClickLoadComments(true)} >Load Comments</button>
-                <button type="button" className="load-comments" aria-label="Show Comments" onClick={() => OnClickLoadComments(false)} >Hide Comments</button>
+                <div className="buttons">
+                    <button type="button" className="load-comments" aria-label="Show Comments" onClick={() => OnClickLoadComments(true)} >Load Comments</button>
+                    <button type="button" className="load-comments" aria-label="Show Comments" onClick={() => OnClickLoadComments(false)} >Hide Comments</button>
+                </div>
+                
                 {article.showComments && (<Comments article={article} />)}
         </article>
     )
     
-}
+};
 
 export default Article;
 
