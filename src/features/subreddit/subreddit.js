@@ -13,8 +13,7 @@ const Subreddit = () => {
 
     return(
         <>
-            <h3>Subreddit: </h3>
-            <input type="text" className="input" value={subreddit} onChange={OnSubredditChange} />
+            <input type="text" className="input" value={subreddit} onChange={OnSubredditChange} placeholder="Search subreddit" />
         </>
     );
 }

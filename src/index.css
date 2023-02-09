@@ -3,7 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   color: aliceblue;
-  font-family: monospace, sans-serif;
+  font-family: 'Roboto Slab', serif;
 }
 
 .App{
@@ -12,12 +12,36 @@
 
 header{
   display: flex;
-  justify-content: space-evenly;
-  margin-bottom: 1px;
+  justify-content: center;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  font-size: 1.5rem;
+  position: sticky;
+  top: 0;
+  background-image: linear-gradient(to right, #050505, #3b3b3a);
 }
 
-nav{
-  display: flex;
+header input{
+  display: inline-block;
+  color: #FFF;
+  font-size: 2rem;
+  font-weight: 600;
+  font-style: italic;
+  text-transform: uppercase;
+  background: none;
+  outline: none;
+  border: none;
+  appearance: none;
+}
+
+header::before{
+  content: '/r/';
+  display: inline-block;
+  color: #FFF;
+  font-size: 2rem;
+  font-weight: 600;
+  font-style: italic;
+  text-transform: uppercase;
 }
 
 .articles{
@@ -29,6 +53,7 @@ nav{
   padding: 4px;
   border: 2px solid rgb(182, 179, 179);
   border-radius: 5px;
+  background-image: linear-gradient(to right, #050505, #3b3b3a);
 }
 
 article{
@@ -46,12 +71,16 @@ article h3{
   font-size: 1.3rem;
   padding: 1px 10px;
   margin-bottom: 5px;
+  font-weight: 500;
 }
 
 article h4{
   color: rgba(220, 220, 220, 0.726);
   margin-left: 10px;
   margin-bottom: 5px;
+  font-family: 'Satisfy', cursive;
+  font-weight: 400;
+  font-size: 1.5rem;
 }
 
 article img{
@@ -67,18 +96,44 @@ article video{
 article .buttons{
   display: flex;
   justify-content: end;
-  margin-top: 5px;
+  margin: 5px;
 }
 
 article .buttons button{
-  font-size: 1rem;
+  font-size: 1.1rem;
+  text-align: center;
   margin-right: 4px;
-  background-image: linear-gradient(to right, orangered, #3b3b3a);
+  padding: 2px;
+  background-image: linear-gradient(to right, rgba(255, 68, 0, 0.932), #3b3b3a);
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.buttons button:hover{
+  background-image: linear-gradient(to right, rgba(255, 68, 0, 0.932), #fa6400);
 }
 
 
 .comment {
-  border: 1px solid  blue;
+  padding: 1px;
+  background-color: #050505;
+  border-radius: 5px;
+  text-align: justify;
+}
+
+.comment:nth-child(2n){
+  background-color: rgba(94, 93, 93, 0.63);
+}
+
+.comment .author{
+  color: rgba(220, 220, 220, 0.726);
+  font-style: italic;
+  margin-bottom: 2px;
+  font-family: 'Satisfy', cursive;
+}
+
+#no-articles{
+  height: 100vw;
 }

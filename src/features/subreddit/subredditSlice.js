@@ -39,16 +39,22 @@ export default subredditSlice.reducer;
 export const { setSubreddit, getArticles, toggleShowComments,setPreId } = subredditSlice.actions;
 
 export const fetchArticles = (subreddit) => async (dispatch) => {
-    const articles = await getSubredditArticles(subreddit);
-    //console.log(articles);
-    if(articles === undefined){
-        return;
+    try {
+        const articles = await getSubredditArticles(subreddit);
+        console.log(`${articles}`);
+        if(articles === undefined){
+            dispatch(getArticles([]));
+            return;
+        }
+        const articlesAddShow = articles.map(article => ({
+            ...article,
+            showComments: false
+        }))
+        dispatch(getArticles(articlesAddShow));
+    } catch (error) {
+        console.log(error)
     }
-    const articlesAddShow = articles.map(article => ({
-        ...article,
-        showComments: false
-    }))
-    dispatch(getArticles(articlesAddShow));
+   
 };
 
 const selectArticles = state => state.subreddit.articles;

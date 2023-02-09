@@ -7,10 +7,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-       <h2>Reddit-viewer</h2>
-       <nav>
+      <nav>
         <Subreddit />
-       </nav>
+      </nav>
+      <h2>Reddit-viewer</h2>
       </header>
         <Articles />
     </div>

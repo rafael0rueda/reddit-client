@@ -43,7 +43,7 @@ function Article(props) {
     return (
         <article>
                 <h3>{article.title}</h3>
-                <h4>Author: {article.author}</h4>
+                <h4>Posted by {article.author}</h4>
                 {
                     mediaDisplay(article)
                 }

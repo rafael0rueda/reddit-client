@@ -21,9 +21,9 @@ const Comments = (props) =>{
                 comments.map((comment, index) => {
                     return (
                         <div className="comment" id={index}>
-                        <p className="author">{comment.author}</p>
-                        <p className="comment-body">{comment.body}</p>
-                    </div>
+                            <p className="author">{comment.author}</p>
+                            <p className="comment-body">{comment.body}</p>
+                        </div>
                     )
                     
                 })

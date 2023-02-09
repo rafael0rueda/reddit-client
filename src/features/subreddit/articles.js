@@ -16,7 +16,7 @@ const Articles = () =>{
     return(
         <div className="articles">
             {
-                (articles != null) ? articles.map( (article, index) => <Article key={index} article={article} /> ) : <p></p>
+                (articles != null) ? articles.map( (article, index) => <Article key={index} article={article} /> ) : <p id="no-articles"></p>
             }
         </div>
     );
